@@ -15,17 +15,25 @@
     <div class="header"><h1>Virtual Library</h1></div>
     <div class="main-content">
         <div class="add-book">
-            <button class="book-button">+ Add Book</button>
+            <button id="bookButton">+ Add Book</button>
         </div>
         <div class="display-books">
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
+            
+        </div>
+    </div>
+    <div class="modal" id="addBookModal">
+        <div class="modal-content">
+            <form class="add-book-form">
+                <h2>Add New Book</h2>
+                <input type="text" id="title" placeholder="Title" maxlength="100" required>
+                <input type="text" id="author" placeholder="Author" maxlength="100" required>
+                <input type="number" id="pages" placeholder="Pages" max="10000" required>
+                <div class="is-read">
+                    <label for="haveRead">Have you read the book?</label>
+                    <input type="checkbox" name="haveRead" id="haveRead">
+                </div>
+                <button type="submit">Submit</button>
+            </form>
         </div>
     </div>
 </body>

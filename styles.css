@@ -1,11 +1,17 @@
+* {
+    box-sizing: border-box;
+}
+
 :root {
     font-family: 'Akshar', sans-serif;
     font-size: 16px;
-    --shadow-color: rgb(183, 183, 183);
-    --card-shadow: 2px 2px 4px var(--shadow-color);
+    --shadow-color: rgba(0, 0, 0, 0.16);
+    --card-shadow: var(--shadow-color) 0px 1px 4px;
+    --background-color: rgb(194, 251, 255);
 }
 
-h1 {
+h1,
+h2 {
     margin: 0;
 }
 
@@ -14,7 +20,7 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: rgb(194, 251, 255);
+    background-color: var(--background-color);
 }
 
 .header {
@@ -38,7 +44,7 @@ body {
     align-items: center;
 }
 
-.book-button {
+#bookButton {
     font: inherit;
     font-size: 1.2rem;
     padding: 10px 30px;
@@ -48,13 +54,9 @@ body {
     box-shadow: var(--card-shadow);
 }
 
-.book-button:hover {
+#bookButton:hover {
     background-color: rgb(244, 241, 241);
     cursor: pointer;
-}
-
-.book-button:active {
-    background-color: white;
 }
 
 .display-books {
@@ -69,4 +71,66 @@ body {
     background-color: white;
     box-shadow: var(--card-shadow);
     border-radius: 12px;
+}
+
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.2s ease-in-out;
+}
+
+.modal-content {
+    position: absolute;
+    top: calc(50% - 200px);
+    left: calc(50% - 200px);
+    background-color: white;
+    padding: 10px;
+    height: 400px;
+    width: 400px;
+    border-radius: 12px;
+    transform: scale(0);
+    transition: 0.2s ease-in-out;
+}
+
+.show-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: 0.2s ease-in-out;
+}
+
+.add-book-form {
+    height: 100%;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.add-book-form button,
+.add-book-form input {
+    font: inherit;
+    font-size: 1.2rem;
+    margin: 0;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--shadow-color);
+}
+
+.add-book-form button {
+    background-color: var(--background-color);
+}
+
+.is-read {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
 }
