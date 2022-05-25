@@ -7,11 +7,6 @@ const cardContainer = document.querySelector(".display-books");
 modalButton.addEventListener("click", toggleModal);
 window.addEventListener("mousedown", windowOnClick);
 
-let book1 = new Book("The Hobbit", "J.R.R. Tolkien", "873", true);
-let book2 = new Book("A Game of Thrones", "George R.R. Martin", "1200", false);
-myLibrary.push(book1, book2);
-displayBook();
-
 //Constructor for book object
 function Book(title, author, pages, read) {
     this.title = title;
