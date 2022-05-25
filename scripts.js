@@ -88,6 +88,8 @@ function displayBook() {
         readButtonStyle(i, book.read);
         buttonContainer.appendChild(remove);
     }
+    toggleReadStatusWithButton();
+    removeIndividualBook();
 }
 
 //Function for removing all books from the page
@@ -111,8 +113,6 @@ function removeIndividualBook() {
             let index = e.target.parentElement.parentElement.dataset.index
             myLibrary.splice(index, 1);
             displayBook();
-            //calls itself to set event listeners again
-            removeIndividualBook();
         }); 
     });
 }
@@ -138,8 +138,6 @@ function toggleReadStatusWithButton() {
             let index = e.target.parentElement.parentElement.dataset.index;
             myLibrary[index].toggleReadStatus();
             displayBook();
-            //calls itself to set event listeners again
-            toggleReadStatusWithButton();
         });
     });
 }
@@ -158,6 +156,4 @@ function windowOnClick(e) {
     }
 }
 
-toggleReadStatusWithButton();
-removeIndividualBook();
 getBookFromForm();
