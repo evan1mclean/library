@@ -10,7 +10,6 @@ window.addEventListener("mousedown", windowOnClick);
 let book1 = new Book("The Hobbit", "J.R.R. Tolkien", "873", true);
 let book2 = new Book("A Game of Thrones", "George R.R. Martin", "1200", false);
 myLibrary.push(book1, book2);
-console.log(myLibrary);
 displayBook();
 
 //Constructor for book object
@@ -19,6 +18,15 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
+}
+
+Book.prototype.toggleReadStatus = function() {
+    if (this.read === true) {
+        this.read = false;
+    }
+    else {
+        this.read = true;
+    }
 }
 
 //adds book to library array
@@ -108,6 +116,7 @@ function removeIndividualBook() {
             let index = e.target.parentElement.parentElement.dataset.index
             myLibrary.splice(index, 1);
             displayBook();
+            //calls itself to set event listeners again
             removeIndividualBook();
         }); 
     });
@@ -126,6 +135,20 @@ function readButtonStyle(i, read) {
     }
 }
 
+//Function for toggling if a book has been read or not with the read/not read button
+function toggleReadStatusWithButton() {
+    let readButton = document.querySelectorAll(".read-button");
+    readButton.forEach(element => {
+        element.addEventListener("click", function(e) {
+            let index = e.target.parentElement.parentElement.dataset.index;
+            myLibrary[index].toggleReadStatus();
+            displayBook();
+            //calls itself to set event listeners again
+            toggleReadStatusWithButton();
+        });
+    });
+}
+
 //function for displaying modal form
 function toggleModal() {
     modal.classList.toggle("show-modal");
@@ -140,5 +163,6 @@ function windowOnClick(e) {
     }
 }
 
+toggleReadStatusWithButton();
 removeIndividualBook();
 getBookFromForm();
