@@ -101,6 +101,7 @@ body {
 }
 
 .button-container button:hover {
+    cursor: pointer;
     filter: brightness(90%);
 }
 

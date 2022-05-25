@@ -54,19 +54,6 @@ function getBookFromForm() {
     });
 }
 
-//Function for removing all books from the page
-function removeAllBooks() {
-    let book = document.querySelectorAll('.card');
-    if (book.length === 0) {
-        return;
-    }
-    else {
-        for (const card of book) {
-            card.remove();
-        }
-    }
-}
-
 //Function to loop through library array and display each book on a card
 function displayBook() {
     removeAllBooks();
@@ -100,6 +87,33 @@ function displayBook() {
     }
 }
 
+//Function for removing all books from the page
+function removeAllBooks() {
+    let book = document.querySelectorAll('.card');
+    if (book.length === 0) {
+        return;
+    }
+    else {
+        for (const card of book) {
+            card.remove();
+        }
+    }
+}
+
+//Function to remove book object from display and library array when remove button is pressed
+function removeIndividualBook() {
+    let removeButton = document.querySelectorAll(".remove-button");
+    removeButton.forEach(element => {
+        element.addEventListener("click", function(e) {
+            let index = e.target.parentElement.parentElement.dataset.index
+            myLibrary.splice(index, 1);
+            displayBook();
+            removeIndividualBook();
+        }); 
+    });
+}
+
+//Displays different style depending on if the book is read or not
 function readButtonStyle(i, read) {
     let button = document.querySelector(`[data-index="${i}"] .read-button`);
     if (read === false) {
@@ -126,4 +140,5 @@ function windowOnClick(e) {
     }
 }
 
+removeIndividualBook();
 getBookFromForm();
