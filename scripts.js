@@ -2,9 +2,16 @@ let myLibrary = [];
 const modal = document.querySelector(".modal");
 const modalContent = document.querySelector(".modal-content");
 const modalButton = document.querySelector("#bookButton");
+const cardContainer = document.querySelector(".display-books");
 
 modalButton.addEventListener("click", toggleModal);
 window.addEventListener("mousedown", windowOnClick);
+
+let book1 = new Book("The Hobbit", "J.R.R. Tolkien", "873", true);
+let book2 = new Book("A Game of Thrones", "George R.R. Martin", "1200", false);
+myLibrary.push(book1, book2);
+console.log(myLibrary);
+displayBook();
 
 //Constructor for book object
 function Book(title, author, pages, read) {
@@ -17,7 +24,6 @@ function Book(title, author, pages, read) {
 //adds book to library array
 function addBookToLibrary(title, author, pages, read) {
     myLibrary.push(new Book(title, author, pages, read));
-    console.log(myLibrary);
 }
 
 //gets user input from form element
@@ -41,10 +47,69 @@ function getBookFromForm() {
         }
         //adds book to library using user input
         addBookToLibrary(title, author, pages, read);
+        displayBook();
         e.preventDefault();
         document.querySelector(".add-book-form").reset();
         toggleModal();
     });
+}
+
+//Function for removing all books from the page
+function removeAllBooks() {
+    let book = document.querySelectorAll('.card');
+    if (book.length === 0) {
+        return;
+    }
+    else {
+        for (const card of book) {
+            card.remove();
+        }
+    }
+}
+
+//Function to loop through library array and display each book on a card
+function displayBook() {
+    removeAllBooks();
+    for (let i = 0; i < myLibrary.length; i++) {
+       let book = myLibrary[i];
+       let card = document.createElement("div");
+        card.classList.add('card');
+        card.dataset.index = i;
+        cardContainer.appendChild(card);
+        let title = document.createElement("h2");
+        let author = document.createElement("p");
+        let pages = document.createElement("p");
+        let buttonContainer = document.createElement("div");
+        let read = document.createElement("button");
+        let remove = document.createElement("button");
+        title.textContent = book.title;
+        author.style.fontStyle = "italic";
+        author.textContent = book.author;
+        pages.textContent = book.pages + " Pages";
+        buttonContainer.classList.add("button-container");
+        read.classList.add('read-button');
+        remove.classList.add('remove-button');
+        remove.textContent = "Remove";
+        card.appendChild(title);
+        card.appendChild(author);
+        card.appendChild(pages);
+        card.appendChild(buttonContainer);
+        buttonContainer.appendChild(read);
+        readButtonStyle(i, book.read);
+        buttonContainer.appendChild(remove);
+    }
+}
+
+function readButtonStyle(i, read) {
+    let button = document.querySelector(`[data-index="${i}"] .read-button`);
+    if (read === false) {
+        button.style.backgroundColor = "rgb(248, 101, 101)";
+        button.textContent = "Not Read";
+    }
+    else {
+        button.style.backgroundColor = "rgb(31, 145, 31)";
+        button.textContent = "Read";
+    }
 }
 
 //function for displaying modal form
