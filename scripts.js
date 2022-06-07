@@ -7,20 +7,21 @@ const cardContainer = document.querySelector(".display-books");
 modalButton.addEventListener("click", toggleModal);
 window.addEventListener("mousedown", windowOnClick);
 
-//Constructor for book object
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-}
-
-Book.prototype.toggleReadStatus = function() {
-    if (this.read === true) {
-        this.read = false;
+//Class for creating book objects
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
     }
-    else {
-        this.read = true;
+    toggleReadStatus() {
+        if (this.read === true) {
+            this.read = false;
+        }
+        else {
+            this.read = true;
+        }
     }
 }
 
