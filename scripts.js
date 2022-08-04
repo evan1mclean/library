@@ -3,9 +3,43 @@ const modal = document.querySelector(".modal");
 const modalContent = document.querySelector(".modal-content");
 const modalButton = document.querySelector("#bookButton");
 const cardContainer = document.querySelector(".display-books");
+const titleInput = document.getElementById('title');
+const authorInput = document.getElementById('author');
+const pagesInput = document.getElementById('pages');
 
 modalButton.addEventListener("click", toggleModal);
 window.addEventListener("mousedown", windowOnClick);
+
+//Custom Error messages for the input modal
+titleInput.addEventListener('input', () => {
+    titleInput.setCustomValidity('');
+    titleInput.checkValidity();
+});
+titleInput.addEventListener('invalid', () => {
+    if(titleInput.value === '') {
+        titleInput.setCustomValidity('Enter the books title!');
+      }
+});
+
+authorInput.addEventListener('input', () => {
+    authorInput.setCustomValidity('');
+    authorInput.checkValidity();
+});
+authorInput.addEventListener('invalid', () => {
+    if(authorInput.value === '') {
+        authorInput.setCustomValidity('Enter the books author!');
+      }
+});
+
+pagesInput.addEventListener('input', () => {
+    pagesInput.setCustomValidity('');
+    pagesInput.checkValidity();
+});
+pagesInput.addEventListener('invalid', () => {
+    if(pagesInput.value === '') {
+        pagesInput.setCustomValidity('Enter the amount pages!');
+      }
+});
 
 //Class for creating book objects
 class Book {
